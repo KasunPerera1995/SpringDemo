@@ -2,6 +2,7 @@ package com.example.demo.data_access;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository

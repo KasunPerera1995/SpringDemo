@@ -18,7 +18,7 @@ public class MainBackEndV1 {
     ProductRepository productRepository;
 
 
-    @GetMapping("/product")
+    @GetMapping("/products")
     public List<com.example.demo.data_access.Product> index(){
         return productRepository.findAll();
     }
@@ -33,7 +33,14 @@ public class MainBackEndV1 {
     @PostMapping("/product")
     @ResponseStatus(HttpStatus.CREATED)
     public Product create(@Valid @RequestBody Product resource) {
-        return productRepository.save(resource);
+        int id = resource.getProduct_id();
+        RestPreconditions.checkInsert(productRepository.findById(id).orElse(null));
+        Product new_product = new Product();
+        new_product.setProduct_id(resource.getProduct_id());
+        new_product.setProduct_name(resource.getProduct_name());
+        new_product.setPrice(resource.getPrice());
+        new_product.setProduct_details(resource.getProduct_details());
+        return productRepository.save(new_product);
     }
 
     @PutMapping(value = "/product/{id}")
@@ -41,7 +48,7 @@ public class MainBackEndV1 {
         Product product = RestPreconditions.checkFound(productRepository.findById(id).orElse(null));
         product.setProduct_name(resource.getProduct_name());
         product.setPrice(resource.getPrice());
-        product.setProduct_details(resource.getProduct_name());
+        product.setProduct_details(resource.getProduct_details());
         return productRepository.save(product);
     }
 
