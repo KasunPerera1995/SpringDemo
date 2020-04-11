@@ -1,4 +1,4 @@
-package com.example.demo.webservice;
+package com.example.demo.service;
 
 import com.example.demo.error.BadRequestException;
 import com.example.demo.error.MyResourceNotFoundException;
