@@ -3,13 +3,12 @@ package com.example.demo.controller.v1;
 import com.example.demo.data.Product;
 import com.example.demo.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 
-import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -35,16 +34,16 @@ public class BackEnd {
     }
 
     @PostMapping
-    public ResponseEntity<?> create(@Valid @RequestBody Product resource) {
+    public ResponseEntity<Product> create(@Valid @RequestBody Product resource) {
 
         Product createdProduct = productService.createProduct(resource);
 
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
-                .path("/{id}")
-                .buildAndExpand(createdProduct.getProduct_id())
-                .toUri();
-
-        return ResponseEntity.created(uri).body(createdProduct);
+//        URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+//                .path("/{id}")
+//                .buildAndExpand(createdProduct.getProduct_id())
+//                .toUri();
+        return new ResponseEntity<>(createdProduct, HttpStatus.CREATED);
+//        return ResponseEntity.created(uri).body(createdProduct);
 
     }
 
@@ -57,10 +56,9 @@ public class BackEnd {
     }
 
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<?> delete(@PathVariable("id") int id) {
+    public ResponseEntity<Void> delete(@PathVariable("id") int id) {
 
         productService.deleteProduct(id);
-
-        return ResponseEntity.noContent().build();
+        return  new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

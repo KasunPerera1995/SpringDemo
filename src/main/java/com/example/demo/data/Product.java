@@ -61,4 +61,9 @@ public class Product {
         this.product_details = product_details;
     }
 
+    @Override
+    public String toString() {
+        return "Product [id=" + product_id + ", object=" + super.toString() + "]";
+    }
+
 }
