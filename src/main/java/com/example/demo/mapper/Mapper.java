@@ -41,15 +41,15 @@ public class Mapper {
         return dto;
 
     }
-    public static void main(String [] args) throws IllegalAccessException, NoSuchFieldException {
-        Product product = new Product();
-        product.setProduct_id(4);
-        product.setPrice(400);
-        product.setProduct_name("Test");
-        ProductDTO productDTO = automaticMapper(product, new ProductDTO());
-        Map<String,String> mappings = new HashMap<>();
-        mappings.put("product_name","name");
-        manual_mapper(product,productDTO,mappings);
-        System.out.println(productDTO.toString());
-    }
+//    public static void main(String [] args) throws IllegalAccessException, NoSuchFieldException {
+//        Product product = new Product();
+//        product.setProduct_id(4);
+//        product.setPrice(400);
+//        product.setProduct_name("Test");
+//        ProductDTO productDTO = automaticMapper(product, new ProductDTO());
+//        Map<String,String> mappings = new HashMap<>();
+//        mappings.put("product_name","name");
+//        manual_mapper(product,productDTO,mappings);
+//        System.out.println(productDTO.toString());
+//    }
 }

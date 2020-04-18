@@ -20,13 +20,13 @@ public class BackEnd {
 
 
     @GetMapping
-    public ResponseEntity<List<Product>> index(){
+    public ResponseEntity<List<ProductDTO>> index(){
         return ResponseEntity.ok(productService.getProducts());
 
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Product> show(@PathVariable String id){
+    public ResponseEntity<ProductDTO> show(@PathVariable String id){
 
         int product_id = Integer.parseInt(id);
         return ResponseEntity.ok(productService.getProduct(product_id));
@@ -34,7 +34,7 @@ public class BackEnd {
     }
 
     @PostMapping
-    public ResponseEntity<Product> create(@Valid @RequestBody Product resource) {
+    public ResponseEntity<ProductDTO> create(@Valid @RequestBody Product resource) {
 
         Product createdProduct = productService.createProduct(resource);
 
@@ -48,7 +48,7 @@ public class BackEnd {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<Product> update(@PathVariable( "id" ) int id, @Valid @RequestBody Product resource) {
+    public ResponseEntity<ProductDTO> update(@PathVariable( "id" ) int id, @Valid @RequestBody Product resource) {
 
         Product updatedProduct = productService.updateProduct(id, resource);
 
